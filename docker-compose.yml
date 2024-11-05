@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: contacts-app
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+  server:
+    build: ./server
+    container_name: server
+    ports:
+      - '5000:5000'
+    environment:
+      MONGO_URL: mongodb://mongodb:27017/contacts-app
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+  client:
+    build: ./contacts-client
+    container_name: client
+    ports:
+      - '8080:80'
+    depends_on:
+      - server
+    networks:
+      - app-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  app-network:
+    driver: bridge
