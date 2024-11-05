@@ -46,7 +46,9 @@ export default {
   methods: {
     async fetchContacts() {
       try {
-        const response = await axios.get('http://localhost:5000/api/contacts')
+        const response = await axios.get(
+          'http://188.225.58.207:5000/api/contacts'
+        )
         this.contacts = response.data
       } catch (error) {
         console.error(error)
@@ -56,7 +58,7 @@ export default {
     async addContact() {
       try {
         const response = await axios.post(
-          'http://localhost:5000/api/contacts',
+          'http://188.225.58.207:5000/api/contacts',
           this.newContact
         )
         this.contacts.push(response.data)
@@ -69,7 +71,7 @@ export default {
 
     async deleteContact(id) {
       try {
-        await axios.delete(`http://localhost:5000/api/contacts/${id}`)
+        await axios.delete(`http://188.225.58.207:5000/api/contacts/${id}`)
         this.contacts = this.contacts.filter((contact) => contact._id !== id)
       } catch (error) {
         console.error(error)

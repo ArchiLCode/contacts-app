@@ -21,5 +21,5 @@ app.use('/api/contacts', require('./routes/contacts'))
 
 // Запуск сервера
 app.listen(5000, () => {
-  console.log(`Сервер запущен на http://localhost:5000`)
+  console.log(`Сервер запущен на http://188.225.58.207:5000`)
 })
