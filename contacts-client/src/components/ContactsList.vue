@@ -1,7 +1,6 @@
 <template>
   <div class="contacts">
     <h1>Contacts App</h1>
-
     <form @submit.prevent="addContact">
       <input
         v-model="newContact.name"

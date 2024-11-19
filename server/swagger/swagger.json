@@ -1,0 +1,137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Contacts API",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Get all contacts",
+        "responses": {
+          "200": {
+            "description": "Array of contacts",
+            "schema": {
+              "$ref": "#/definitions/Contacts"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Create new contact",
+        "parameters": [
+          {
+            "name": "contact",
+            "in": "body",
+            "description": "New contact",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "+7(800)555-35-35"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "New contact",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "delete": {
+        "description": "Delete contact",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete contact",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "1"
+        },
+        "name": {
+          "type": "string",
+          "example": "test"
+        },
+        "phone": {
+          "type": "string",
+          "example": "+7(800)555-35-35"
+        },
+        "__v": {
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "Contacts": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "array"
+        },
+        "items": {
+          "$ref": "#/definitions/Contact"
+        }
+      }
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "test"
+        }
+      }
+    }
+  }
+}
